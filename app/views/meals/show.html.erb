@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @meal.name %>
+</p>
+<% unless @meal.recipe_book.nil? %>
+  <p>
+  <strong>Recipe Book:</strong>
+    <%= link_to @meal.recipe_book.name, recipe_book_path(@meal.recipe_book) %>
+  </p>
+  <% unless @meal.page_number.nil? %>
+    <p>
+    <strong>Page Number:</strong>
+      <%= @meal.page_number %>
+    </p>
+  <% end %>
+
+  <% unless @meal.ingredients.blank? %>
+    <strong>Ingredients</strong>
+    <div><%= simple_format(@meal.ingredients) %></div>
+  <% end %>
+<% end %>
+
+
+<%= link_to 'Edit', edit_meal_path(@meal) %> |
+<%= link_to 'Back', meals_path %>

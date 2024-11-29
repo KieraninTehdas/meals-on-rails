@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recipe Books</h1>
+
+<table class="table">
+
+  <tbody>
+    <% @recipe_books.each do |recipe_book| %>
+      <tr>
+        <td><%= link_to recipe_book.name, recipe_book %></td>
+        <td><%= link_to 'Edit', edit_recipe_book_path(recipe_book), class: "btn btn-secondary" %></td>
+        <td><%= link_to 'Delete',
+          recipe_book,
+          class: "btn btn-danger",
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add New', new_recipe_book_path, class: "btn btn-primary" %>

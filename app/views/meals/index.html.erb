@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Meals</h1>
+
+
+<table class="table">
+  <tbody>
+    <% @meals.each do |meal| %>
+      <tr>
+        <td><%= link_to meal.name, meal %></td>
+        <td><%= link_to 'Edit', edit_meal_path(meal), class: "btn btn-secondary" %></td>
+        <td><%= link_to 'Delete',
+          meal,
+          class: "btn btn-danger",
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add New', new_meal_path, class: "btn btn-primary" %>

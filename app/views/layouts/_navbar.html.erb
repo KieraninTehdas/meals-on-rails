@@ -1,0 +1,18 @@
+<nav class="menu">
+  <div class="menu__home-button">
+    <%= link_to "The Red Book", meal_plans_path %>
+  </div>
+
+  <div>
+  </div>
+
+  <div class="menu__items">
+    <% [
+      {text: "Plans", link: meal_plans_path},
+      {text: "Meals", link: meals_path},
+      {text: "Recipe Books", link: recipe_books_path}
+    ].each do |item| %>
+      <div class="menu-item"><%= link_to item[:text], item[:link] %></div>
+    <% end %>
+  </div>
+</nav>

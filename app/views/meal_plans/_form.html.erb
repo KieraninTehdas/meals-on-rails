@@ -1,0 +1,56 @@
+<%= form_with(model: meal_plan) do |form| %>
+  <% if meal_plan.errors.any? %>
+    <div id="error_explanation">
+      <ul class="alert alert-danger">
+        <% meal_plan.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset class="mb-3">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="">
+          <%= form.label :start_date %>
+        </span>
+      </div>
+      <%= form.date_select :start_date, { order: [:day, :month, :year] }, { class: "form-control" } %>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="">
+          <%= form.label :end_date %>
+        </span>
+      </div>
+      <%= form.date_select :end_date,
+        { order: [:day, :month, :year],
+          default: Date.today + 6 },
+          { class: "form-control" } %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :meals, class: "form-label" %>
+      <%= form.select :meal_ids,
+        options_from_collection_for_select(Meal.all, :id, :name, @meal_plan.meal_ids),
+        { :include_hidden => false }, { :multiple => true, class: "form-select" }
+      %>
+    </div>
+  </fieldset>
+
+  <fieldset class="mb-3">
+    <div class="form-group">
+      <%= form.submit class: "btn btn-primary" %>
+      <% unless @meal_plan.new_record? %>
+        <%= link_to "Delete",
+          @meal_plan,
+          class: "btn btn-danger",
+          method: :delete,
+          data: { confirm: "Are you sure?" }
+        %>
+      <% end %>
+    </div>
+  </fieldset>
+<% end %>

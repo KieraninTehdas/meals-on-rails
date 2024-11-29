@@ -18,20 +18,22 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_215621) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "meal_plans_meals", id: false, force: :cascade do |t|
-    t.integer "meal_plan_id", null: false
-    t.integer "meal_id", null: false
+  create_table "meal_plans_meals", force: :cascade do |t|
+    t.integer "meal_plan_id"
+    t.integer "meal_id"
+    t.boolean "eaten"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "meals", force: :cascade do |t|
     t.string "name"
     t.integer "page_number"
-    t.boolean "eaten", default: false
     t.text "ingredients"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "meals_id", null: false
-    t.index ["meals_id"], name: "index_meals_on_meals_id"
+    t.integer "recipe_book_id"
+    t.index ["recipe_book_id"], name: "index_meals_on_recipe_book_id"
   end
 
   create_table "recipe_books", force: :cascade do |t|
@@ -40,5 +42,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_215621) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "meals", "meals", column: "meals_id"
+  add_foreign_key "meals", "recipe_books"
 end

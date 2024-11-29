@@ -1,0 +1,46 @@
+<%= form_with(model: meal) do |form| %>
+  <% if meal.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+        <% meal.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset class="mb-3">
+    <div class="field mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="field mb-3">
+      <%= form.label :recipe_book, class: "form-label" %>
+      <%= form.select :recipe_book_id,
+        RecipeBook.all.collect { |b| [ b.name, b.id ] },
+        { include_blank: "None" },
+        { class: "form-select" } %>
+    </div>
+
+    <div class="field mb-3">
+      <%= form.label :page_number, class: "form-label" %>
+      <%= form.text_field :page_number, class: "form-control" %>
+    </div>
+
+    <div class="field mb-3">
+      <%= form.label :ingredients, class: "form-label" %>
+      <%= form.text_area :ingredients, class: "form-control" %>
+      <div class="form-text">
+        Enter ingredients separate by a comma or newline
+      </div>
+    </div>
+
+  </fieldset>
+
+  <fieldset class="mb-3">
+    <div class="actions">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  </fieldset>
+<% end %>
