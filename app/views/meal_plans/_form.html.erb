@@ -1,7 +1,7 @@
 <%= form_with(model: meal_plan) do |form| %>
   <% if meal_plan.errors.any? %>
     <div id="error_explanation">
-      <ul class="alert alert-danger">
+      <ul class="">
         <% meal_plan.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -9,14 +9,14 @@
     </div>
   <% end %>
 
-  <fieldset class="mb-3">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="">
+  <fieldset class="">
+    <div class="">
+      <div class="">
+        <span class="" id="">
           <%= form.label :start_date %>
         </span>
       </div>
-      <%= form.date_select :start_date, { order: [:day, :month, :year] }, { class: "form-control" } %>
+      <input type="date" id="meal_plan_start_date" name="meal_plan[start_date]" value="<%= meal_plan.start_date || Date.today %>"/>
     </div>
 
     <div class="input-group mb-3">
@@ -25,10 +25,7 @@
           <%= form.label :end_date %>
         </span>
       </div>
-      <%= form.date_select :end_date,
-        { order: [:day, :month, :year],
-          default: Date.today + 6 },
-          { class: "form-control" } %>
+      <input type="date" id="meal_plan_end_date" name="meal_plan[end_date]" value="<%= 6.days.after(Date.today) %>"/>
     </div>
 
     <div class="mb-3">

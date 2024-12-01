@@ -17,8 +17,8 @@ class MealPlansController < ApplicationController
 
   def create
     @meal_plan = MealPlan.new(
-      start_date: date_param_to_date(:start_date),
-      end_date: date_param_to_date(:end_date),
+      start_date: meal_plan_params[:start_date],
+      end_date: meal_plan_params[:end_date],
       meal_ids: meal_plan_params.fetch(:meal_ids, [])
     )
 
@@ -37,6 +37,10 @@ class MealPlansController < ApplicationController
 
   def past_meal_plans
     @past_meal_plans = MealPlan.past.order(end_date: :desc)
+  end
+
+  def upcoming_meal_plans
+    @upcoming_meal_plans = MealPlan.future.order(start_date: :asc)
   end
 
   def destroy
@@ -60,10 +64,5 @@ class MealPlansController < ApplicationController
 
   def meal_plan_params
     params.require(:meal_plan).permit(:start_date, :end_date, meal_ids: [])
-  end
-
-  def date_param_to_date(param_name)
-    date_components = %w[1 2 3].map { |e| meal_plan_params["#{param_name}(#{e}i)"].to_i }
-    Date.new(*date_components)
   end
 end
