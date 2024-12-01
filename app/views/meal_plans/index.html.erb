@@ -46,7 +46,6 @@
   </div>
 <% end %>
 
-<%= button_to("Edit", edit_meal_plan_path(@current_meal_plan), :secondary) %>
-<%= link_to "Edit", edit_meal_plan_path(@current_meal_plan), class: "btn btn-secondary mb-3" %>
+<%= button_to("Edit", edit_meal_plan_path(@current_meal_plan), :tertiary, "pencil-solid.svg") %>
 <%= link_to 'Past Weeks', past_meal_plans_path %>
-<%= link_to 'New Meal Plan', new_meal_plan_path %>
+<%= button_to("New Meal Plan", new_meal_plan_path, :primary) %>

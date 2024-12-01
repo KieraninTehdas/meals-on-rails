@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def button_to(button_text, path, type = :tertiary)
+  def button_to(button_text, path, type = :tertiary, icon = nil)
     button_type_classes = {
       primary: "bg-red-400 text-black",
       secondary: "text-red-400 border",
@@ -8,12 +8,11 @@ module ApplicationHelper
 
     classes = button_type_classes.fetch(type, "")
 
-    classes += " inline-block text-center w-fit min-w-28 p-1"
+    classes += " inline-block text-center p-1"
 
     unless type == :tertiary
-      classes += " rounded-md"
+      classes += " rounded-md min-w-28"
     end
-
-    link_to button_text, path, class: classes
+    render "shared/link_to_button", button_text: button_text, path: path, icon: icon, classes: classes
   end
 end
