@@ -1,16 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="text-red-400">This Week We Shall Mostly Be Eating</h1>
+<h1 class="text-xl sm:text-4xl font-bold text-red-400">This Week We Shall Mostly Be Eating</h1>
 
 <% if @current_meal_plan.nil? %>
   <p>Nothing :(</p>
 <% else %>
-  <div class="ms-1">
+  <div class="font-bold">
     <p><%= @current_meal_plan.start_date.to_formatted_s(:long) %> --> <%= @current_meal_plan.end_date.to_formatted_s(:long) %></p>
   </div>
-  <ul class="list-group mb-3">
+  <ul class="">
     <% @current_meal_plan.meal_plan_meals.each do |plan_meal| %>
-      <li class="list-group-item"><%= plan_meal.meal.name %>
+      <li class=""><%= plan_meal.meal.name %>
       <input
         id=<%= "checkbox-plan-meal-#{plan_meal.id}" %>
              class="form-check-input ms-1"
@@ -27,19 +27,25 @@
     <% end %>
   </ul>
 
-  <div data-controller="populate-input" data-populate-input-url-value=<%= shopping_list_meal_plan_path(@current_meal_plan) %>>
-    <button class="btn btn-primary mb-3" data-action="populate-input#populateInput">Generate Shopping List</button>
-    <%= link_to "Edit", edit_meal_plan_path(@current_meal_plan), class: "btn btn-secondary mb-3" %>
+  <div 
+    class="flex flex-col space-y-2"
+    data-controller="populate-input" data-populate-input-url-value=<%= shopping_list_meal_plan_path(@current_meal_plan) %>>
+    <div>
+      <button class="" data-action="populate-input#populateInput">Generate Shopping List</button>
+    </div>
 
-    <div class="mb-3" style="display:none;" data-populate-input-target="inputContainer" data-controller="clipboard">
-      <textarea id="shopping-list-input" class="form-control mb-3" data-populate-input-target="input" data-clipboard-target="source"></textarea>
+    <div class="flex flex-col space-y-2 hidden" data-populate-input-target="inputContainer" data-controller="clipboard">
+      <textarea id="shopping-list-input" class="resize-none rounded-md border-2 border-blue-500 shadow-sm h-32 w-fit"
+        data-populate-input-target="input" data-clipboard-target="source"></textarea>
 
-      <button class="btn btn-secondary mb-3" data-action="clipboard#copy">Copy To Clipboard</button>
-
+      <div>
+        <button class="" data-action="clipboard#copy">Copy To Clipboard</button>
+      </div>
       <div id="alert-placeholder" data-clipboard-target="alertPlaceholder"></div>
     </div>
   </div>
 <% end %>
 
+<%= link_to "Edit", edit_meal_plan_path(@current_meal_plan), class: "btn btn-secondary mb-3" %>
 <%= link_to 'Past Weeks', past_meal_plans_path %>
 <%= link_to 'New Meal Plan', new_meal_plan_path %>

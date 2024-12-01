@@ -10,7 +10,7 @@ export default class extends Controller {
     }).then((response) => {
       response.json().then((body) => {
         this.inputTarget.value = body;
-        this.inputContainerTarget.style.display = "inline";
+        this.inputContainerTarget.classList.remove("hidden");
       });
     });
   }
