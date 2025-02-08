@@ -29,8 +29,8 @@
     </div>
 
     <div class="flex flex-col my-2">
-      <%= form.label :meals, class: "" %>
-      <%= form.select :meal_ids,
+      <%= form.label :meals, class: "pb-2" %>
+      <%= form.collection_checkboxes :meal_ids,
         options_from_collection_for_select(Meal.all, :id, :name, @meal_plan.meal_ids),
         { :include_hidden => false }, { :multiple => true, class: "" }
       %>

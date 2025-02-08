@@ -23,7 +23,7 @@ class MealPlansController < ApplicationController
     )
 
     if @meal_plan.save
-      redirect_to @meal_plan, notice: "Meal plan was created successfully"
+      redirect_to action: "index"
     else
       render :new, status: :unprocessable_entity
     end

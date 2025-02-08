@@ -3,4 +3,12 @@ class MealPlanMeal < ApplicationRecord
 
   belongs_to :meal
   belongs_to :meal_plan
+
+  def recipe_book_name
+    meal.recipe_book_name
+  end
+
+  def name
+    meal.name
+  end
 end
