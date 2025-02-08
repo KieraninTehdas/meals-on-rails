@@ -1,4 +1,4 @@
-<%= form_with(model: meal_plan) do |form| %>
+<%= form_with(model: meal_plan, class: "flex flex-col") do |form| %>
   <% if meal_plan.errors.any? %>
     <div id="error_explanation">
       <ul class="">
@@ -9,9 +9,9 @@
     </div>
   <% end %>
 
-  <fieldset class="">
-    <div class="">
-      <div class="">
+  <fieldset class="flex flex-col my-4">
+    <div class="my-2">
+      <div class="pb-2">
         <span class="" id="">
           <%= form.label :start_date %>
         </span>
@@ -19,33 +19,33 @@
       <input type="date" id="meal_plan_start_date" name="meal_plan[start_date]" value="<%= meal_plan.start_date || Date.today %>"/>
     </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="">
+    <div class="my-2">
+      <div class="pb-2">
+        <span class="" id="">
           <%= form.label :end_date %>
         </span>
       </div>
       <input type="date" id="meal_plan_end_date" name="meal_plan[end_date]" value="<%= 6.days.after(Date.today) %>"/>
     </div>
 
-    <div class="mb-3">
-      <%= form.label :meals, class: "form-label" %>
+    <div class="flex flex-col my-2">
+      <%= form.label :meals, class: "" %>
       <%= form.select :meal_ids,
         options_from_collection_for_select(Meal.all, :id, :name, @meal_plan.meal_ids),
-        { :include_hidden => false }, { :multiple => true, class: "form-select" }
+        { :include_hidden => false }, { :multiple => true, class: "" }
       %>
     </div>
   </fieldset>
 
-  <fieldset class="mb-3">
-    <div class="form-group">
-      <%= form.submit class: "btn btn-primary" %>
+  <fieldset class="my-4">
+    <div class="flex gap-x-2">
+      <%= form.button "New meal plan", class: primary_button_classes %>
       <% unless @meal_plan.new_record? %>
-        <%= link_to "Delete",
+        <%= button_to "Delete",
           @meal_plan,
-          class: "btn btn-danger",
+          :secondary,
           method: :delete,
-          data: { confirm: "Are you sure?" }
+          data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
         %>
       <% end %>
     </div>

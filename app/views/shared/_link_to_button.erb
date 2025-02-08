@@ -1,5 +1,5 @@
 <div class="grow-0 w-fit flex space-x-2">
-  <%= link_to button_text, path, class: classes %>
+  <%= link_to button_text, path,method: method.to_s, class: classes,  data: %>
 
   <% if icon.present? %>
     <%= image_tag(icon, size: "16") %>
