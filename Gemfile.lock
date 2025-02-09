@@ -93,7 +93,6 @@ GEM
       reline (>= 0.3.8)
     diff-lcs (1.5.1)
     drb (2.2.1)
-    error_highlight (0.7.0)
     erubi (1.13.1)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
@@ -318,7 +317,6 @@ DEPENDENCIES
   brakeman
   cssbundling-rails
   debug
-  error_highlight (>= 0.4.0)
   faker (~> 3.5)
   jsbundling-rails
   propshaft
