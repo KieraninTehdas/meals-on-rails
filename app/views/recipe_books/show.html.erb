@@ -1,23 +1,25 @@
-<p id="notice"><%= notice %></p>
+<h1 class="text-xl sm:text-4xl font-bold"><%= @recipe_book.name %></h1>
 
-<h2><%= @recipe_book.name %></h2>
+<div class="flex flex-col my-2 gap-y-4">
+  <div>
+    <% if @recipe_book.meals.present? %>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="font-bold">Meal</div>
+        <div class="font-bold">Page Number</div>
+        
+        <% @recipe_book.meals.each do |meal| %>
+          <div><%= button_to meal.name, meal, :tertiary %></div>
+          <div><%= meal.page_number %></div>
+        <% end %>
+      </div>
 
-<% if @recipe_book.meals.present? %>
-  <table class="table">
-    <tr>
-      <th>Meal</th>
-      <th>Page Number</th>
-    </tr>
-
-    <% @recipe_book.meals.each do |meal| %>
-      <tr>
-        <td><%= link_to meal.name, meal %></td>
-        <td><%= meal.page_number %></td>
-      </tr>
+    <% else %>
+      <span>No recipes in this book</span>
     <% end %>
-  </table>
-<% end %>
+  </div>
 
-
-<%= link_to 'Edit', edit_recipe_book_path(@recipe_book) %> |
-<%= link_to 'Back', recipe_books_path %>
+  <div class="flex gap-x-2">
+    <%= button_to "Edit", edit_recipe_book_path(@recipe_book), :primary %>
+    <%= button_to "Back", recipe_books_path, :secondary %>
+  </div>
+</div>

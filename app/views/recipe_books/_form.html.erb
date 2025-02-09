@@ -1,7 +1,7 @@
 <%= form_with(model: recipe_book) do |form| %>
   <% if recipe_book.errors.any? %>
     <div id="error_explanation">
-      <ul class="alert alert-danger">
+      <ul class="text-red-400 font-bold">
         <% recipe_book.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -9,16 +9,28 @@
     </div>
   <% end %>
 
-  <fieldset class="mb-3">
-    <div class="field">
-      <%= form.label :name, class: "form-label" %>
-      <%= form.text_field :name, class: "form-control" %>
+  <fieldset class="flex flex-col my-4">
+    <div class="my-2 flex gap-x-2">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "rounded-sm border border-slate-400 border-solid" %>
     </div>
   </fieldset>
+  
+  <fieldset class="flex flex-col gap-y-2 my-4">
+    <div class="flex gap-x-2">
+      <%= form.button "Save", class: primary_button_classes %>
+      <%= button_to 'Back', recipe_books_path, :secondary%>
+    </div>
 
-  <fieldset class="mb-3">
-    <div class="actions">
-      <%= form.submit class: "btn btn-primary" %>
+    <div>
+      <% unless @recipe_book.new_record? %>
+        <%= button_to "Delete",
+          @recipe_book,
+          :tertiary,
+          method: :delete,
+          data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
+        %>
+      <% end %>
     </div>
   </fieldset>
 <% end %>
