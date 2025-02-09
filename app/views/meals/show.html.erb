@@ -1,9 +1,5 @@
-<p id="notice"><%= notice %></p>
+<h1 class="text-xl sm:text-4xl font-bold"><%= @meal.name %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @meal.name %>
-</p>
 <% unless @meal.recipe_book.nil? %>
   <p>
   <strong>Recipe Book:</strong>
@@ -15,13 +11,15 @@
       <%= @meal.page_number %>
     </p>
   <% end %>
+<% end %>
 
-  <% unless @meal.ingredients.blank? %>
-    <strong>Ingredients</strong>
-    <div><%= simple_format(@meal.ingredients) %></div>
-  <% end %>
+<% unless @meal.ingredients.blank? %>
+  <strong>Ingredients</strong>
+  <div><%= simple_format(@meal.ingredients) %></div>
 <% end %>
 
 
-<%= link_to 'Edit', edit_meal_path(@meal) %> |
-<%= link_to 'Back', meals_path %>
+<div class="flex gap-x-2">
+  <%= button_to 'Edit', edit_meal_path(@meal), :primary %>
+  <%= button_to 'Back', meals_path, :secondary %>
+</div>
