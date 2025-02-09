@@ -8,10 +8,7 @@
   </div>
   <ul class="flex flex-col gap-y-2">
     <% @current_meal_plan.meal_plan_meals.each do |plan_meal| %>
-      <li><%= plan_meal.name %>
-        <% if plan_meal.recipe_book_name.present? %>
-          (<%= plan_meal.recipe_book_name %>)
-        <% end %>
+      <li>
       <input
         id=<%= "checkbox-plan-meal-#{plan_meal.id}" %>
              class="form-check-input ms-1"
@@ -23,7 +20,11 @@
           <% if plan_meal.eaten? %>
             checked
           <% end %>
-        >
+          >
+        <%= plan_meal.name %>
+        <% if plan_meal.recipe_book_name.present? %>
+          (<%= plan_meal.recipe_book_name %>)
+        <% end %>
       </li>
     <% end %>
   </ul>

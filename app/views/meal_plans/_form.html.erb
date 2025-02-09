@@ -30,20 +30,26 @@
 
     <div class="flex flex-col my-2">
       <%= form.label :meals, class: "pb-2" %>
-      <%= form.collection_checkboxes :meal_ids,
-        options_from_collection_for_select(Meal.all, :id, :name, @meal_plan.meal_ids),
-        { :include_hidden => false }, { :multiple => true, class: "" }
-      %>
+      <%= form.collection_check_boxes :meal_ids, Meal.all, :id, :name do |meal_option| %>
+        <div class="flex gap-x-2">
+          <%= meal_option.check_box %>
+          <%= meal_option.label %>
+        </div>
+      <% end %>
     </div>
   </fieldset>
 
-  <fieldset class="my-4">
+  <fieldset class="flex flex-col gap-y-2 my-4">
     <div class="flex gap-x-2">
-      <%= form.button "New meal plan", class: primary_button_classes %>
+      <%= form.button @meal_plan.new_record? ? "New meal plan" : "Save", class: primary_button_classes %>
+      <%= button_to 'Back', meal_plans_path, :secondary%>
+    </div>
+
+    <div>
       <% unless @meal_plan.new_record? %>
         <%= button_to "Delete",
           @meal_plan,
-          :secondary,
+          :tertiary,
           method: :delete,
           data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
         %>

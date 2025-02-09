@@ -32,7 +32,7 @@ class MealPlansController < ApplicationController
   def update
     @meal_plan.update!(meal_plan_params)
 
-    redirect_to @meal_plan, notice: "Meal plan was successfully updated."
+    redirect_to action: "index"
   end
 
   def past_meal_plans
