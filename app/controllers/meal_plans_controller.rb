@@ -36,7 +36,15 @@ class MealPlansController < ApplicationController
   end
 
   def past_meal_plans
-    @past_meal_plans = MealPlan.past.order(end_date: :desc)
+    plans_per_page = 3
+
+    offset = [ page_number - 1, 0 ].max * plans_per_page
+
+    if offset > MealPlan.count
+      offset = MealPlan.count - plans_per_page
+    end
+
+    @past_meal_plans = MealPlan.past.order(end_date: :desc).offset(offset).limit(3)
   end
 
   def upcoming_meal_plans
@@ -64,5 +72,9 @@ class MealPlansController < ApplicationController
 
   def meal_plan_params
     params.require(:meal_plan).permit(:start_date, :end_date, meal_ids: [])
+  end
+
+  def page_number
+    params.fetch(:page, 1).to_i
   end
 end
