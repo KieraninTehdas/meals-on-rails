@@ -10,6 +10,9 @@ application.register("checkbox", CheckboxController)
 import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 
+import FormFieldStateController from "./form_field_state_controller"
+application.register("form-field-state", FormFieldStateController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

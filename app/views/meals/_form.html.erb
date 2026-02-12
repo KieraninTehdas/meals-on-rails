@@ -1,4 +1,4 @@
-<%= form_with(model: meal) do |form| %>
+<%= form_with(model: meal, data: { controller: "form-field-state" }) do |form| %>
   <% if meal.errors.any? %>
     <div id="error_explanation" class="text-red-400 font-bold">
       <ul>
@@ -20,12 +20,12 @@
       <%= form.select :recipe_book_id,
         RecipeBook.all.collect { |b| [ b.name, b.id ] },
         { include_blank: "" },
-        { class: "bg-white rounded-sm border border-slate-400 border-solid p-1" } %>
+        { class: "bg-white rounded-sm border border-slate-400 border-solid p-1", data: { "form-field-state-target": "trigger", action: "change->form-field-state#updateDependentState" } } %>
     </div>
 
     <div class="my-2 flex gap-x-2">
       <%= form.label :page_number %>
-      <%= form.text_field :page_number, class: "rounded-sm border border-slate-400 border-solid" %>
+      <%= form.text_field :page_number, class: "rounded-sm border border-slate-400 border-solid", data: { "form-field-state-target": "dependent" }, disabled: true %>
     </div>
 
     <div class="my-2 flex flex-col gap-y-2" >
@@ -33,7 +33,7 @@
       <%= form.text_area :ingredients,
         class: "resize-none grow-0 shrink-0 rounded-sm border border-slate-400 border-solid sm:w-64 h-48 p-1" %>
       <div class="font-light text-sm">
-        Enter ingredients separate by a comma or newline
+        Enter ingredients separated by a comma or newline
       </div>
     </div>
   </fieldset>
