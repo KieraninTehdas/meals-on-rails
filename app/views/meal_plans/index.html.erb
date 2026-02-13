@@ -50,7 +50,9 @@
 
 <div class="flex gap-x-2">
   <%= button_to "New plan", new_meal_plan_path, :primary %>
-  <%= button_to "Edit", edit_meal_plan_path(@current_meal_plan), :secondary %>
+  <% unless @current_meal_plan.nil? %>
+    <%= button_to "Edit", edit_meal_plan_path(@current_meal_plan), :secondary %>
+  <% end %>
 </div>
 
 <%= button_to 'Past Weeks', past_meal_plans_path, :tertiary %>
