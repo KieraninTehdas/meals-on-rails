@@ -7,16 +7,16 @@ namespace :db do
     end
 
     10.times do
-      meal = Meal.new(name: Faker::Food.dish)
+      recipe = Recipe.new(name: Faker::Food.dish)
 
       if [ true, false ].sample
-        meal.recipe_book = RecipeBook.all.sample
-        meal.page_number = rand(300)
+        recipe.recipe_book = RecipeBook.all.sample
+        recipe.page_number = rand(300)
       end
 
-      meal.ingredients = Array.new(8) { Faker::Food.ingredient }.join("\n")
+      recipe.ingredients = Array.new(8) { Faker::Food.ingredient }.join("\n")
 
-      meal.save!
+      recipe.save!
     end
   end
 end
