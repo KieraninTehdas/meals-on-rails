@@ -39,8 +39,7 @@ class MealPlansController < ApplicationController
     @pagy, @past_meal_plans = pagy(
       :offset,
       MealPlan.past.order(end_date: :desc)
-        .distinct
-        .where.associated(:meal_plan_meals), limit: 3)
+      .includes(:meals).where.not(meals: { id: nil }), limit: 3)
   end
 
   def upcoming_meal_plans
