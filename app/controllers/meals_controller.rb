@@ -17,7 +17,7 @@ class MealsController < ApplicationController
     @meal = Meal.new(meal_params)
 
     if @meal.save
-      redirect_to action: "index", notice: "Meal was successfully created"
+      redirect_to action: "index"
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,7 +25,7 @@ class MealsController < ApplicationController
 
   def update
     if @meal.update(meal_params)
-      redirect_to action: "index", notice: "Meal was successfully updated"
+      redirect_to action: "index"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class MealsController < ApplicationController
 
   def destroy
     @meal.destroy
-    redirect_to meals_url, notice: "Meal was successfully destroyed."
+    redirect_to meals_url
   end
 
   private
