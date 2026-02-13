@@ -1,0 +1,9 @@
+<h1 class="text-xl sm:text-4xl font-bold">Recipes</h1>
+
+<ul class="flex flex-col">
+  <% @recipes.each do |recipe| %>
+    <li><%= button_to recipe.name, recipe, :tertiary %></li>
+  <% end %>
+</ul>
+
+<%= button_to "New recipe", new_recipe_path, :primary %>

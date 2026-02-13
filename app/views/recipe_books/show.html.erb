@@ -2,14 +2,14 @@
 
 <div class="flex flex-col my-2 gap-y-4">
   <div>
-    <% if @recipe_book.meals.present? %>
+    <% if @recipe_book.recipes.present? %>
       <div class="grid grid-cols-2 gap-4">
-        <div class="font-bold">Meal</div>
+        <div class="font-bold">Recipe</div>
         <div class="font-bold">Page Number</div>
         
-        <% @recipe_book.meals.each do |meal| %>
-          <div><%= button_to meal.name, meal, :tertiary %></div>
-          <div><%= meal.page_number %></div>
+        <% @recipe_book.recipes.each do |recipe| %>
+          <div><%= button_to recipe.name, recipe, :tertiary %></div>
+          <div><%= recipe.page_number %></div>
         <% end %>
       </div>
 

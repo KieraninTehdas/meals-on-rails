@@ -1,14 +1,14 @@
 class MealPlanMeal < ApplicationRecord
   self.table_name = "meal_plans_meals"
 
-  belongs_to :meal
+  belongs_to :recipe
   belongs_to :meal_plan
 
   def recipe_book_name
-    meal.recipe_book_name
+    recipe.recipe_book_name
   end
 
   def name
-    meal.name
+    recipe.name
   end
 end

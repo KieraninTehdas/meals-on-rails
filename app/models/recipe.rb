@@ -1,4 +1,4 @@
-class Meal < ApplicationRecord
+class Recipe < ApplicationRecord
   belongs_to :recipe_book, optional: true
 
   has_many :meal_plan_meals, dependent: :delete_all

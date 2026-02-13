@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       get "search", to: "recipe_books#search"
     end
   end
-  resources :meals
+  resources :recipes
 
   patch "meal-plan-meals/:id", to: "meal_plan_meals#update_eaten_status"
 end

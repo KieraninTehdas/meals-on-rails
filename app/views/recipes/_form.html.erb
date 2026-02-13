@@ -1,8 +1,8 @@
-<%= form_with(model: meal, data: { controller: "form-field-state" }) do |form| %>
-  <% if meal.errors.any? %>
+<%= form_with(model: recipe, data: { controller: "form-field-state" }) do |form| %>
+  <% if recipe.errors.any? %>
     <div id="error_explanation" class="text-red-400 font-bold">
       <ul>
-        <% meal.errors.each do |error| %>
+        <% recipe.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -41,13 +41,13 @@
   <fieldset class="flex flex-col gap-y-2 my-4">
     <div class="flex gap-x-2">
       <%= form.button "Save", class: primary_button_classes %>
-      <%= button_to 'Back', meals_path, :secondary%>
+      <%= button_to 'Back', recipes_path, :secondary%>
     </div>
 
     <div>
-      <% unless @meal.new_record? %>
+      <% unless @recipe.new_record? %>
         <%= button_to "Delete",
-          @meal,
+          @recipe,
           :tertiary,
           method: :delete,
           data: { turbo_confirm: "Are you sure?", turbo_method: :delete }

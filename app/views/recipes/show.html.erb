@@ -1,0 +1,25 @@
+<h1 class="text-xl sm:text-4xl font-bold"><%= @recipe.name %></h1>
+
+<% unless @recipe.recipe_book.nil? %>
+  <p>
+  <strong>Recipe Book:</strong>
+    <%= link_to @recipe.recipe_book.name, recipe_book_path(@recipe.recipe_book) %>
+  </p>
+  <% unless @recipe.page_number.nil? %>
+    <p>
+    <strong>Page Number:</strong>
+      <%= @recipe.page_number %>
+    </p>
+  <% end %>
+<% end %>
+
+<% unless @recipe.ingredients.blank? %>
+  <strong>Ingredients</strong>
+  <div><%= simple_format(@recipe.ingredients) %></div>
+<% end %>
+
+
+<div class="flex gap-x-2">
+  <%= button_to "Edit", edit_recipe_path(@recipe), :primary %>
+  <%= button_to "Back", recipes_path, :secondary %>
+</div>

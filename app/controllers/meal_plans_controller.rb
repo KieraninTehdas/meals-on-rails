@@ -1,6 +1,6 @@
 class MealPlansController < ApplicationController
   before_action :set_meal_plan, only: %i[show edit update destroy generate_shopping_list]
-  before_action :available_meals, only: %i[create edit]
+  before_action :available_recipes, only: %i[create edit]
 
   def index
     @meal_plans = MealPlan.all
@@ -19,7 +19,7 @@ class MealPlansController < ApplicationController
     @meal_plan = MealPlan.new(
       start_date: meal_plan_params[:start_date],
       end_date: meal_plan_params[:end_date],
-      meal_ids: meal_plan_params.fetch(:meal_ids, [])
+      recipe_ids: meal_plan_params.fetch(:recipe_ids, [])
     )
 
     if @meal_plan.save
@@ -39,7 +39,7 @@ class MealPlansController < ApplicationController
     @pagy, @past_meal_plans = pagy(
       :offset,
       MealPlan.past.order(end_date: :desc)
-      .includes(:meals).where.not(meals: { id: nil }), limit: 3)
+      .includes(:recipes).where.not(recipes: { id: nil }), limit: 3)
   end
 
   def upcoming_meal_plans
@@ -52,7 +52,7 @@ class MealPlansController < ApplicationController
   end
 
   def generate_shopping_list
-    render json: @meal_plan.meals.map(&:ingredients).join("\n").to_json
+    render json: @meal_plan.recipes.map(&:ingredients).join("\n").to_json
   end
 
   private
@@ -61,11 +61,11 @@ class MealPlansController < ApplicationController
     @meal_plan = MealPlan.find(params[:id])
   end
 
-  def available_meals
-    @available_meals = Meal.all
+  def available_recipes
+    @available_recipes = Recipe.all
   end
 
   def meal_plan_params
-    params.require(:meal_plan).permit(:start_date, :end_date, meal_ids: [])
+    params.require(:meal_plan).permit(:start_date, :end_date, recipe_ids: [])
   end
 end

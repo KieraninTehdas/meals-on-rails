@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_29_215621) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_13_232347) do
   create_table "meal_plans", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
@@ -20,20 +20,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_215621) do
 
   create_table "meal_plans_meals", force: :cascade do |t|
     t.integer "meal_plan_id"
-    t.integer "meal_id"
+    t.integer "recipe_id"
     t.boolean "eaten"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "meals", force: :cascade do |t|
-    t.string "name"
-    t.integer "page_number"
-    t.text "ingredients"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "recipe_book_id"
-    t.index ["recipe_book_id"], name: "index_meals_on_recipe_book_id"
   end
 
   create_table "recipe_books", force: :cascade do |t|
@@ -42,5 +32,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_215621) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "meals", "recipe_books"
+  create_table "recipes", force: :cascade do |t|
+    t.string "name"
+    t.integer "page_number"
+    t.text "ingredients"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "recipe_book_id"
+    t.index ["recipe_book_id"], name: "index_recipes_on_recipe_book_id"
+  end
+
+  add_foreign_key "recipes", "recipe_books"
 end

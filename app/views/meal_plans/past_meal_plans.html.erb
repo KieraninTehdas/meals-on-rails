@@ -8,8 +8,8 @@
       <div class="my-2">
         <h2 class="font-bold"><%= "#{plan.start_date} -> #{plan.end_date}" %></h2>
         <ul class="flex flex-col gap-y-2">
-          <% plan.meals.each do |meal| %>
-            <li><%= meal.name %></li>
+          <% plan.recipes.each do |recipe| %>
+            <li><%= recipe.name %></li>
           <% end %>
         </ul>
       </div>

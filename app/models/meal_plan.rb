@@ -1,6 +1,6 @@
 class MealPlan < ApplicationRecord
   has_many :meal_plan_meals, dependent: :delete_all
-  has_many :meals, through: :meal_plan_meals
+  has_many :recipes, through: :meal_plan_meals, source: :recipe
 
   validates :start_date, :end_date, presence: true
   validate :end_after_start?
