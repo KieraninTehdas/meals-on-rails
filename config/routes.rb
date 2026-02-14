@@ -27,5 +27,9 @@ Rails.application.routes.draw do
   end
   resources :recipes
 
-  patch "meal-plan-meals/:id", to: "meal_plan_meals#update_eaten_status"
+  resources :meals do
+    member do
+      put "update_eaten_status"
+    end
+  end
 end

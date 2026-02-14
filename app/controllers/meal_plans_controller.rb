@@ -1,13 +1,11 @@
 class MealPlansController < ApplicationController
-  before_action :set_meal_plan, only: %i[show edit update destroy generate_shopping_list]
+  before_action :set_meal_plan, only: %i[edit update destroy generate_shopping_list]
   before_action :available_recipes, only: %i[create edit]
 
   def index
     @meal_plans = MealPlan.all
     @current_meal_plan = MealPlan.current.first || MealPlan.last
   end
-
-  def show; end
 
   def new
     @meal_plan = MealPlan.new

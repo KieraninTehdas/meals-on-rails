@@ -9,7 +9,7 @@ export default class extends Controller {
     const updatedCheckboxValue = this.valueTarget.checked;
 
     fetch(this.urlValue, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "X-CSRF-Token": this.getCsrfToken(),

@@ -7,23 +7,23 @@
     <p><%= @current_meal_plan.start_date.to_formatted_s(:long) %> --> <%= @current_meal_plan.end_date.to_formatted_s(:long) %></p>
   </div>
   <ul class="flex flex-col gap-y-2">
-    <% @current_meal_plan.meal_plan_meals.each do |plan_meal| %>
+    <% @current_meal_plan.meals.each do |meal| %>
       <li>
       <input
-        id=<%= "checkbox-plan-meal-#{plan_meal.id}" %>
+        id=<%= "checkbox-meal-#{meal.id}" %>
              class="form-check-input ms-1"
              type="checkbox"
              data-controller="checkbox"
              data-action="checkbox#toggle"
              data-checkbox-target="value"
-             data-checkbox-url-value=<%= plan_meal_url(plan_meal.id) %>
-          <% if plan_meal.eaten? %>
+             data-checkbox-url-value=<%= update_eaten_status_meal_path(meal) %>
+          <% if meal.eaten? %>
             checked
           <% end %>
           >
-        <%= plan_meal.name %>
-        <% if plan_meal.recipe_book_name.present? %>
-          (<%= plan_meal.recipe_book_name %>)
+        <%= meal.name %>
+        <% if meal.recipe_book_name.present? %>
+          (<%= meal.recipe_book_name %>)
         <% end %>
       </li>
     <% end %>

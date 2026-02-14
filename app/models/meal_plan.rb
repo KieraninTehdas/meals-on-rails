@@ -1,6 +1,6 @@
 class MealPlan < ApplicationRecord
-  has_many :meal_plan_meals, dependent: :delete_all
-  has_many :recipes, through: :meal_plan_meals, source: :recipe
+  has_many :meals, dependent: :delete_all
+  has_many :recipes, through: :meals
 
   validates :start_date, :end_date, presence: true
   validate :end_after_start?
@@ -10,7 +10,7 @@ class MealPlan < ApplicationRecord
   scope :current, -> { where("start_date <= ? and end_date >= ?", Time.zone.today, Time.zone.today) }
 
   def complete?
-    meal_plan_meals.map(&:eaten?).all?
+    meals.map(&:eaten?).all?
   end
 
   private

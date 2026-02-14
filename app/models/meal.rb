@@ -1,5 +1,5 @@
-class MealPlanMeal < ApplicationRecord
-  self.table_name = "meal_plans_meals"
+class Meal < ApplicationRecord
+  self.table_name = "meals"
 
   belongs_to :recipe
   belongs_to :meal_plan
