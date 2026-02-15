@@ -43,7 +43,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    cleaned_params = params.require(:recipe).permit(:name, :recipe_book_id, :page_number, :ingredients)
+    cleaned_params = params.require(:recipe).permit(:name, :recipe_book_id, :page_number, :ingredients, label_ids: [])
 
     cleaned_params[:ingredients] = cleaned_params[:ingredients].strip if cleaned_params[:ingredients]
 

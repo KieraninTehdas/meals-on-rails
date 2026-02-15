@@ -13,6 +13,17 @@
   <% end %>
 <% end %>
 
+<% if @recipe.labels.any? %>
+  <p>
+    <strong>Labels:</strong>
+    <div class="flex gap-x-2 flex-wrap">
+      <% @recipe.labels.each do |label| %>
+        <%= link_to label.name, label, class: "text-xs bg-gray-200 rounded px-2 py-1" %>
+      <% end %>
+    </div>
+  </p>
+<% end %>
+
 <% unless @recipe.ingredients.blank? %>
   <strong>Ingredients</strong>
   <div><%= simple_format(@recipe.ingredients) %></div>

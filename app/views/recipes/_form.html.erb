@@ -36,6 +36,14 @@
         Enter ingredients separated by a comma or newline
       </div>
     </div>
+
+    <div class="my-2 flex gap-x-2">
+      <%= form.label :labels %>
+      <%= form.collection_check_boxes :label_ids, Label.all, :id, :name,
+        { class: "flex gap-x-4" } do |b| %>
+        <% b.label { b.check_box + " " + b.text } %>
+      <% end %>
+    </div>
   </fieldset>
 
   <fieldset class="flex flex-col gap-y-2 my-4">
