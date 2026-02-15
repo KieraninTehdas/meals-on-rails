@@ -17,4 +17,17 @@ RSpec.describe Recipe, type: :model do
       it { is_expected.to eq "Nigella Ramsay" }
     end
   end
+
+  describe "labels" do
+    context "when adding a label to a recipe" do
+      it "correctly associates the label to the recipe" do
+        recipe = Recipe.create!(name: "Salad")
+        label = Label.create!(name: "Vegetarian")
+
+        recipe.labels << label
+
+        expect(recipe.labels.size).to eq 1
+      end
+    end
+  end
 end

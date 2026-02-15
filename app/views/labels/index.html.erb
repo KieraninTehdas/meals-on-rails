@@ -1,0 +1,9 @@
+<h1 class="text-xl sm:text-4xl font-bold">Labels</h1>
+
+<ul class="flex flex-col">
+  <% @labels.each do |label| %>
+    <li><%= button_to label.name, label, :tertiary %></li>
+  <% end %>
+</ul>
+
+<%= button_to "New label", new_label_path, :primary %>

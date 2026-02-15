@@ -1,0 +1,15 @@
+<h1 class="text-xl sm:text-4xl font-bold"><%= @label.name %></h1>
+
+<% if @label.recipes.any? %>
+  <strong>Recipes</strong>
+  <ul class="flex flex-col">
+    <% @label.recipes.each do |recipe| %>
+      <li><%= link_to recipe.name, recipe %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="flex gap-x-2">
+  <%= button_to "Edit", edit_label_path(@label), :primary %>
+  <%= button_to "Back", labels_path, :secondary %>
+</div>

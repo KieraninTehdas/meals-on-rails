@@ -32,4 +32,6 @@ Rails.application.routes.draw do
       put "update_eaten_status"
     end
   end
+
+  resources :labels
 end
