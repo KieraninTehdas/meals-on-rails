@@ -1,17 +1,17 @@
-<nav class="bg-red-400 w-screen sm:w-fit sm:min-h-screen">
-  <div class="my-auto py-2">
-    <div class="relative flex flex-row sm:flex-col h-16 items-center justify-between">
-      <div class="flex flex-row sm:flex-col flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex flex-col flex-shrink-0 items-center">
-          <%= image_tag "logo.png", class:"h-8 w-auto", alt:"Your Company" %>
+<nav class="navbar">
+  <div class="navbar__wrapper">
+    <div class="navbar__content">
+      <div class="navbar__logo-section">
+        <div class="navbar__logo">
+          <%= image_tag "logo.png", alt:"Your Company" %>
         </div>
 
-          <div class="flex flex-row sm:flex-col space-x-4 sm:space-x-0 sm:space-y-4 my-2 mx-2">
-            <%= link_to "Plans", meal_plans_path, class:"rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" %>
-            <%= link_to "Recipes", recipes_path, class:"rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" %>
-            <%= link_to "Recipe Books", recipe_books_path, class:"rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" %>
-            <%= link_to "Labels", labels_path, class:"rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" %>
-          </div>
+        <div class="navbar__links">
+          <%= link_to "Plans", meal_plans_path, class:"navbar__link" %>
+          <%= link_to "Recipes", recipes_path, class:"navbar__link" %>
+          <%= link_to "Recipe Books", recipe_books_path, class:"navbar__link" %>
+          <%= link_to "Labels", labels_path, class:"navbar__link" %>
+        </div>
       </div>
     </div>
   </div>
