@@ -33,9 +33,12 @@
     <div class="flex flex-col my-2">
       <%= form.label :recipes, class: "pb-2" %>
       <%= form.collection_check_boxes :recipe_ids, Recipe.all, :id, :name do |recipe_option| %>
-        <div class="flex gap-x-2">
+        <div class="flex gap-x-2 mb-3">
           <%= recipe_option.check_box %>
           <%= recipe_option.label %>
+          <% recipe_option.object.labels.each do |label| %>
+              <%= render "labels/label", label: label %>
+          <% end %>
         </div>
       <% end %>
     </div>
