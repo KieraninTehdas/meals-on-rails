@@ -8,7 +8,7 @@
         <% if recipe.labels.any? %>
           <div class="flex gap-x-2 flex-wrap">
             <% recipe.labels.each do |label| %>
-              <span class="text-xs bg-gray-200 rounded px-2 py-1"><%= label.name %></span>
+              <%= render "labels/label", label: label %>
             <% end %>
           </div>
         <% end %>
