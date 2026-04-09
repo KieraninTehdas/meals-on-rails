@@ -36,6 +36,10 @@ class RecipesController < ApplicationController
     redirect_to recipes_url
   end
 
+  def search
+    @result = Recipe.all
+  end
+
   private
 
   def set_recipe

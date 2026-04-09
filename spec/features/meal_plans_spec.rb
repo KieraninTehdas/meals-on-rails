@@ -24,6 +24,21 @@ RSpec.feature "MealPlans", type: :feature do
     plan_recipes.each { |recipe_name| expect(page).to have_text(recipe_name) }
   end
 
+  scenario "User searches for meals by name or label" do
+    plan_recipe_names = %w[fish chips mushy peas pizza]
+    (plan_recipe_names + %w[pasta]).each { |recipe_name| Recipe.create!(name: recipe_name) }
+
+    visit "/"
+
+    expect(page).to have_text("This Week We Shall Mostly Be Eating")
+    expect(page).to have_text("Nothing")
+
+    click_on "New plan"
+
+    find "#recipe-search-input"
+    find_field("recipe-search-input", placeholder: "Search by name or label").click
+  end
+
   scenario "User edits a meal plan" do
     plan_recipe_names = %w[fish chips mushy peas pizza]
     (plan_recipe_names + %w[pasta]).each { |recipe_name| Recipe.create!(name: recipe_name) }
