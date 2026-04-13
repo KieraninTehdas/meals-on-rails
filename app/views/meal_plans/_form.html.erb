@@ -31,11 +31,9 @@
     </div>
 
     <div class="flex flex-col my-2">
-      <%= form.label :recipes, class: "pb-2" %>
-      <form method="get">
-        <input list="recipe-options" id="recipe-search-input" name="meal_plan[recipe_ids][]" placeholder="Search by name or label" />
-      </form>
-      <div id="recipe-options">
+      <div>
+        <%= text_field_tag("recipe-search-input", "", placeholder: "Search by name or label", data: { controller: "form-submit", "form-submit-url-value": search_recipes_path, "form-submit-frame-id-value": "recipe-options", action: "input->form-submit#handleSubmit"}) %>
+        <turbo-frame id="recipe-options"></turbo-frame>
       </div>
       <%= form.collection_check_boxes :recipe_ids, Recipe.all, :id, :name do |recipe_option| %>
         <div class="flex gap-x-2 mb-3">

@@ -13,6 +13,9 @@ application.register("clipboard", ClipboardController)
 import FormFieldStateController from "./form_field_state_controller"
 application.register("form-field-state", FormFieldStateController)
 
+import FormSubmitController from "./form_submit_controller"
+application.register("form-submit", FormSubmitController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
