@@ -25,7 +25,13 @@ Rails.application.routes.draw do
       get "search", to: "recipe_books#search"
     end
   end
-  resources :recipes
+
+  resources :recipes do
+    collection do
+      get "search", to: "recipes#search"
+    end
+  end
+
 
   resources :meals do
     member do

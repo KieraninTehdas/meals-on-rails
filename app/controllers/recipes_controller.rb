@@ -37,7 +37,9 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @result = Recipe.all
+    @results = Recipe.all
+
+    render "search_results"
   end
 
   private
