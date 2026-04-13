@@ -37,7 +37,7 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @results = Recipe.all
+    @results = Recipe.where("name LIKE ?", "%#{ActiveRecord::Base.sanitize_sql(params[:q])}%")
 
     render "search_results"
   end
