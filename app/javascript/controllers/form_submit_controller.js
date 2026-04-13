@@ -7,9 +7,10 @@ export default class extends Controller {
     frameId: String
   };
 
-  handleSubmit() {
+  handleSubmit(event) {
+    // TODO: DEBOUNCE THIS!
     const turboFrame = document.getElementById(this.frameIdValue);
-    turboFrame.src = this.urlValue;
+    turboFrame.src = `${this.urlValue}?q=${event.target.value}`;
   }
 
   debounce(callback, delay) {
