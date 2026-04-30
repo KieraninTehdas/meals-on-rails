@@ -21,3 +21,6 @@ application.register("hello", HelloController)
 
 import PopulateInputController from "./populate_input_controller"
 application.register("populate-input", PopulateInputController)
+
+import RecipeSelectorController from "./recipe_selector_controller"
+application.register("recipe-selector", RecipeSelectorController)
