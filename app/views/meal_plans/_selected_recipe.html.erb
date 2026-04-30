@@ -1,0 +1,11 @@
+<div class="flex items-center justify-between p-2 bg-gray-100 rounded mb-2" data-recipe-id="<%= recipe.id %>">
+  <div class="flex items-center gap-2">
+    <span><%= recipe.name %></span>
+    <% recipe.labels.each do |label| %>
+      <%= render "labels/label", label: label %>
+    <% end %>
+  </div>
+  <button type="button" data-action="click->recipe-selector#removeRecipe" class="text-red-600 hover:text-red-800 font-medium">
+    Remove
+  </button>
+</div>

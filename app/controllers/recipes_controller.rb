@@ -37,7 +37,11 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @results = Recipe.where("name LIKE ?", "%#{ActiveRecord::Base.sanitize_sql(params[:q])}%")
+    query = params[:q] || ""
+    selected_ids = params[:selected_ids]&.split(",")&.map(&:to_i) || []
+    
+    @results = Recipe.where("name LIKE ?", "%#{ActiveRecord::Base.sanitize_sql(query)}%")
+                     .where.not(id: selected_ids)
 
     render "search_results"
   end

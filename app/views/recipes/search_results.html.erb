@@ -1,7 +1,25 @@
 <turbo-frame id="recipe-options">
-  <ul>
-    <% @results.each do |result| %>
-      <li><%= result.name %></li>
-    <% end %>
-  </ul>
-</div>
+  <% if @results.any? %>
+    <ul class="space-y-2">
+      <% @results.each do |recipe| %>
+        <li>
+          <button type="button" 
+                  data-action="click->recipe-selector#addRecipe" 
+                  data-recipe-id="<%= recipe.id %>"
+                  data-recipe-name="<%= recipe.name %>"
+                  data-recipe-labels="<%= recipe.labels.map(&:name).join(',') %>"
+                  class="w-full text-left p-2 hover:bg-blue-50 rounded cursor-pointer border border-gray-200">
+            <div class="flex items-center gap-2">
+              <span><%= recipe.name %></span>
+              <% recipe.labels.each do |label| %>
+                <%= render "labels/label", label: label %>
+              <% end %>
+            </div>
+          </button>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-gray-500 p-2">No recipes found</p>
+  <% end %>
+</turbo-frame>

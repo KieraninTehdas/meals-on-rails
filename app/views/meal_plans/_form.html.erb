@@ -31,19 +31,27 @@
     </div>
 
     <div class="flex flex-col my-2">
-      <div>
-        <%= text_field_tag("recipe-search-input", "", placeholder: "Search by name or label", data: { controller: "form-submit", "form-submit-url-value": search_recipes_path, "form-submit-frame-id-value": "recipe-options", action: "input->form-submit#handleSubmit"}) %>
-        <turbo-frame id="recipe-options"></turbo-frame>
-      </div>
-      <%= form.collection_check_boxes :recipe_ids, Recipe.all, :id, :name do |recipe_option| %>
-        <div class="flex gap-x-2 mb-3">
-          <%= recipe_option.check_box %>
-          <%= recipe_option.label %>
-          <% recipe_option.object.labels.each do |label| %>
-              <%= render "labels/label", label: label %>
-          <% end %>
+      <div data-controller="recipe-selector">
+        <div class="mb-4">
+          <label for="recipe-search-input" class="block text-sm font-medium mb-2">Search Recipes</label>
+          <%= text_field_tag("recipe-search-input", "", placeholder: "Search by name or label", data: { controller: "form-submit", "form-submit-url-value": search_recipes_path, "form-submit-frame-id-value": "recipe-options", action: "input->form-submit#handleSubmit"}) %>
+          <turbo-frame id="recipe-options"></turbo-frame>
         </div>
-      <% end %>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium mb-2">Selected Recipes</label>
+          <div id="selected-recipes" data-recipe-selector-target="selectedList" class="border rounded p-3 min-h-20">
+            <% if meal_plan.recipe_ids.any? %>
+              <% meal_plan.recipes.each do |recipe| %>
+                <%= render "meal_plans/selected_recipe", recipe: recipe %>
+              <% end %>
+            <% else %>
+              <p class="text-gray-500">No recipes selected</p>
+            <% end %>
+          </div>
+          <%= form.hidden_field :recipe_ids, value: meal_plan.recipe_ids.join(","), id: "recipe-ids-input", data: { "recipe-selector-target": "recipeInput" } %>
+        </div>
+      </div>
     </div>
   </fieldset>
 

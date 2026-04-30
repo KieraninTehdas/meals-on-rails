@@ -10,7 +10,17 @@ export default class extends Controller {
   handleSubmit(event) {
     // TODO: DEBOUNCE THIS!
     const turboFrame = document.getElementById(this.frameIdValue);
-    turboFrame.src = `${this.urlValue}?q=${event.target.value}`;
+    const searchValue = event.target.value;
+    const selectedRecipeInput = document.getElementById("recipe-ids-input");
+    const selectedIds = selectedRecipeInput ? selectedRecipeInput.value : "";
+    
+    const params = new URLSearchParams();
+    params.append("q", searchValue);
+    if (selectedIds) {
+      params.append("selected_ids", selectedIds);
+    }
+    
+    turboFrame.src = `${this.urlValue}?${params.toString()}`;
   }
 
   debounce(callback, delay) {
