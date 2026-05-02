@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "MealPlans", type: :feature do
+RSpec.feature "MealPlans", type: :feature, js: true do
   scenario "User creates a meal plan" do
     5.times { Recipe.create!(name: Faker::Food.unique.dish) }
 
@@ -16,7 +16,13 @@ RSpec.feature "MealPlans", type: :feature do
 
     plan_recipes = Recipe.pluck(:name).sample(3)
 
-    plan_recipes.each { |recipe_name| check(recipe_name) }
+
+    plan_recipes.each do |recipe_name|
+      fill_in "Search Recipes", with: recipe_name
+      within find "#recipe-search-results" do
+       click_on recipe_name
+      end
+    end
 
     click_button "New meal plan"
 

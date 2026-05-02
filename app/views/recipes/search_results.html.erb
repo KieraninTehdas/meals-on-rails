@@ -1,6 +1,6 @@
 <turbo-frame id="recipe-options">
   <% if @results.any? %>
-    <ul class="space-y-2">
+    <ul id="recipe-search-results" class="space-y-2">
       <% @results.each do |recipe| %>
         <li>
           <button type="button" 
