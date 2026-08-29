@@ -70,7 +70,7 @@ export default class extends Controller {
       this.selectedListTarget.querySelectorAll("[data-recipe-id]")
     ).map((el) => el.dataset.recipeId);
 
-    this.recipeInputTarget.value = selectedRecipes.join(",");
+    this.recipeInputTarget.value = selectedRecipes;
   }
 
   refreshSearchResults() {
