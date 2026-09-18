@@ -37,6 +37,8 @@ gem "faker", "~> 3.5"
 
 gem "pagy", "~> 43.2"
 
+gem "json", "< 3"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -52,7 +54,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "rspec-rails", "~> 7.0.0"
+  gem "rspec-rails", "~> 8.0.0"
   gem "capybara", "~> 3.40"
   gem "cuprite"
 end
