@@ -1,7 +1,7 @@
 <%= form_with(model: meal_plan, class: "flex flex-col") do |form| %>
   <% if meal_plan.errors.any? %>
     <div id="error_explanation">
-      <ul class="">
+      <ul>
         <% meal_plan.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -17,7 +17,7 @@
           <%= form.label :start_date %>
         </span>
       </div>
-      <input type="date" id="meal_plan_start_date" name="meal_plan[start_date]" value="<%= meal_plan.start_date || Date.today %>"/>
+      <input type="date" id="meal_plan_start_date" name="meal_plan[start_date]" value="<%= meal_plan.start_date || Date.today %>">
     </div>
 
     <div class="sm:pl-4 sm:my-0 my-2">
@@ -26,11 +26,11 @@
           <%= form.label :end_date %>
         </span>
       </div>
-      <input type="date" id="meal_plan_end_date" name="meal_plan[end_date]" value="<%= 6.days.after(Date.today) %>"/>
+      <input type="date" id="meal_plan_end_date" name="meal_plan[end_date]" value="<%= 6.days.after(Date.today) %>">
     </div>
     </div>
 
-    <div class="flex flex-col my-2">
+    <div id="recipe-options" class="flex flex-col my-2">
       <%= form.label :recipes, class: "pb-2" %>
       <%= form.collection_check_boxes :recipe_ids, Recipe.all, :id, :name do |recipe_option| %>
         <div class="flex gap-x-2 mb-3">
@@ -42,18 +42,29 @@
         </div>
       <% end %>
     </div>
+
+    <div id="selected-recipes" class="flex flex-col my-2">
+      <% meal_plan.meals.each do |recipe| %>
+        <div class="flex gap-x-2 mb-3">
+          <%= recipe.name %>
+          <% recipe.labels.each do |label| %>
+            <%= render "labels/label", label: label %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </fieldset>
 
   <fieldset class="flex flex-col gap-y-2 my-4">
     <div class="flex gap-x-2">
-      <%= form.button @meal_plan.new_record? ? "New meal plan" : "Save", class: primary_button_classes %>
-      <%= button_to 'Back', meal_plans_path, :secondary%>
+      <%= form.button meal_plan.new_record? ? "New meal plan" : "Save", class: primary_button_classes %>
+      <%= button_to 'Back', meal_plans_path, :secondary %>
     </div>
 
     <div>
-      <% unless @meal_plan.new_record? %>
+      <% unless meal_plan.new_record? %>
         <%= button_to "Delete",
-          @meal_plan,
+          meal_plan,
           :tertiary,
           method: :delete,
           data: { turbo_confirm: "Are you sure?", turbo_method: :delete }
