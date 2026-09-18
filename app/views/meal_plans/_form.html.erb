@@ -29,7 +29,9 @@
       <input type="date" id="meal_plan_end_date" name="meal_plan[end_date]" value="<%= 6.days.after(Date.today) %>">
     </div>
     </div>
+  </fieldset>
 
+  <fieldset class="flex flex-col my-4">
     <div id="recipe-options" class="flex flex-col my-2">
       <%= form.label :recipes, class: "pb-2" %>
       <%= form.collection_check_boxes :recipe_ids, Recipe.all, :id, :name do |recipe_option| %>
@@ -38,17 +40,6 @@
           <%= recipe_option.label %>
           <% recipe_option.object.labels.each do |label| %>
               <%= render "labels/label", label: label %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-
-    <div id="selected-recipes" class="flex flex-col my-2">
-      <% meal_plan.meals.each do |recipe| %>
-        <div class="flex gap-x-2 mb-3">
-          <%= recipe.name %>
-          <% recipe.labels.each do |label| %>
-            <%= render "labels/label", label: label %>
           <% end %>
         </div>
       <% end %>
