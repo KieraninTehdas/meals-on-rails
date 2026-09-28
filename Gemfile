@@ -35,7 +35,7 @@ gem "bootsnap", require: false
 
 gem "faker", "~> 3.5"
 
-gem "pagy", "~> 43.2"
+gem "pagy", "~> 43.6"
 
 gem "json", "< 3"
 
