@@ -34,4 +34,6 @@ Rails.application.routes.draw do
   end
 
   resources :labels
+
+  post "recipe_searches", to: "recipe_searches#create"
 end
