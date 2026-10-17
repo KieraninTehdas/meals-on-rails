@@ -1,4 +1,5 @@
 @import "./navbar.css";
+@import "./meal_plan.css";
 
 @tailwind base;
 @tailwind components;

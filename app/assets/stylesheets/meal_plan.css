@@ -1,0 +1,10 @@
+.meal-plan-recipe-option {
+  order: 1;
+}
+
+.meal-plan-recipe-option:has(:checked) {
+  order: 0;
+   label {
+    color: red;
+  }
+}
