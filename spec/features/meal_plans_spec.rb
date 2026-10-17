@@ -34,12 +34,14 @@ RSpec.feature "MealPlans", type: :feature do
     visit "/"
 
     expect(page).to have_text("This Week We Shall Mostly Be Eating")
-    expect(page).to have_text("#{meal_plan.start_date.to_fs(:long)} --> #{meal_plan.end_date.to_fs(:long)}")
+    expect(page).to have_text(meal_plan.start_date.to_fs(:long))
+    expect(page).to have_text(meal_plan.end_date.to_fs(:long))
     plan_recipe_names.each { |name| expect(page).to have_text(name) }
 
     click_on "Edit"
 
-    fill_in "End date", with: 3.days.from_now.to_date
+    updated_end_date = 3.days.from_now.to_date
+    fill_in "End date", with: updated_end_date
 
     uncheck "mush"
     uncheck "peas"
@@ -49,7 +51,8 @@ RSpec.feature "MealPlans", type: :feature do
     click_button "Save"
 
     expect(page).to have_text("This Week We Shall Mostly Be Eating")
-    expect(page).to have_text("#{meal_plan.start_date.to_fs(:long)} --> #{3.days.from_now.to_date.to_fs(:long)}")
+    expect(page).to have_text(meal_plan.start_date.to_fs(:long))
+    expect(page).to have_text(updated_end_date.to_date.to_fs(:long))
     %w[fish chips pasta].each { |name| expect(page).to have_text(name) }
     %w[mush peas pizza].each { |name| expect(page).not_to have_text(name) }
   end

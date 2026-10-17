@@ -4,36 +4,40 @@
   <p>Nothing :(</p>
 <% else %>
   <div class="font-bold">
-    <p><%= @current_meal_plan.start_date.to_formatted_s(:long) %> --> <%= @current_meal_plan.end_date.to_formatted_s(:long) %></p>
+    <p><%= @current_meal_plan.start_date.to_formatted_s(:long) %> &rarr; <%= @current_meal_plan.end_date.to_formatted_s(:long) %></p>
   </div>
   <ul class="flex flex-col gap-y-2">
     <% @current_meal_plan.meals.each do |meal| %>
       <li>
       <input
-        id=<%= "checkbox-meal-#{meal.id}" %>
+        id="checkbox-meal-<%= meal.id %>"
              class="form-check-input ms-1"
              type="checkbox"
              data-controller="checkbox"
              data-action="checkbox#toggle"
              data-checkbox-target="value"
-             data-checkbox-url-value=<%= update_eaten_status_meal_path(meal) %>
+             data-checkbox-url-value="<%= update_eaten_status_meal_path(meal) %>"
           <% if meal.eaten? %>
             checked
           <% end %>
-          >
-        <%= meal.name %>
+>
+        <%= link_to meal.name, meal.recipe %>
         <% if meal.recipe_book_name.present? %>
           (<%= meal.recipe_book_name %>)
+        <% end %>
+
+        <% meal.recipe.labels.each do |label| %>
+          <%= render "labels/label", label: label %>
         <% end %>
       </li>
     <% end %>
   </ul>
 
-  <div 
+  <div
     class="flex flex-col space-y-2"
-    data-controller="populate-input" data-populate-input-url-value=<%= shopping_list_meal_plan_path(@current_meal_plan) %>>
+    data-controller="populate-input" data-populate-input-url-value="<%= shopping_list_meal_plan_path(@current_meal_plan) %>">
     <div>
-      <button class="" data-action="populate-input#populateInput">Generate Shopping List</button>
+      <button data-action="populate-input#populateInput">Generate Shopping List</button>
     </div>
 
     <div class="flex flex-col space-y-2 hidden" data-populate-input-target="inputContainer" data-controller="clipboard">
@@ -41,7 +45,7 @@
         data-populate-input-target="input" data-clipboard-target="source"></textarea>
 
       <div>
-        <button class="" data-action="clipboard#copy">Copy To Clipboard</button>
+        <button data-action="clipboard#copy">Copy To Clipboard</button>
       </div>
       <div id="alert-placeholder" data-clipboard-target="alertPlaceholder"></div>
     </div>
