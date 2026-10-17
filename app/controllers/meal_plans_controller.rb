@@ -3,8 +3,8 @@ class MealPlansController < ApplicationController
   before_action :available_recipes, only: %i[create edit]
 
   def index
-    @meal_plans = MealPlan.all
-    @current_meal_plan = MealPlan.current.first || MealPlan.last
+    base_scope = MealPlan.includes(recipes: [ :recipe_book, :labels ])
+    @current_meal_plan = base_scope.current.first || base_scope.last
   end
 
   def new
