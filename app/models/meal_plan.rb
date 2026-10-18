@@ -4,6 +4,7 @@ class MealPlan < ApplicationRecord
 
   validates :start_date, :end_date, presence: true
   validate :end_after_start?
+  validate :only_current_plan?
 
   scope :past, -> { where("end_date < ?", Time.zone.today) }
   scope :future, -> { where("start_date > ?", Time.zone.today) }
@@ -17,5 +18,22 @@ class MealPlan < ApplicationRecord
 
   def end_after_start?
     errors.add(:end_date, "must be after start date") if end_date < start_date
+  end
+
+  def only_current_plan?
+    overlapping_plans = MealPlan.where("start_date >= ? and start_date <= ?", start_date, end_date)
+      .or(MealPlan.where("end_date >= ? and end_date <= ?", start_date, end_date))
+      .or(MealPlan.where("start_date <= ? and end_date >= ?", start_date, end_date))
+
+    return unless overlapping_plans.present?
+
+    if overlapping_plans.size == 1 && overlapping_plans.first == self
+      return
+    end
+
+    errors.add(
+      :base,
+      "there is already a meal plan that overlaps those dates"
+    )
   end
 end
